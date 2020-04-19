@@ -15,12 +15,11 @@ print("--------------------------------")
 # Select preferred game level and convert to lowercase
 level = input("Please enter your difficulty level: ").lower()
 
-# Easy level
-if level == "e":
-    answer = random.randint(1,10)
-    life = 6
-    while life > 0:
-        print("You have", life, "guesses left. Please guess between 1 and 10")
+
+# Define game function to be used for each difficulty level
+def game(guesses_left, answer):
+    while guesses_left > 0:
+        print("You have", guesses_left, "guesses left.")
         
         # check if input is an integer
         try:
@@ -28,7 +27,7 @@ if level == "e":
         except ValueError:
             print("Invalid input, please enter a valid integer")
             continue
-        life -= 1
+        guesses_left -= 1
         
         # check if guess is correct
         if guess == answer:
@@ -42,59 +41,22 @@ if level == "e":
             pass
         pass
     print("Game Over!")
+    return guesses_left, answer
 
-# Medium level
+
+# Easy level, available guesses = 6 and answer is between 1 to 10
+if level == "e":
+    print("Please guess between 1 and 10")
+    game(6, random.randint(1,10))
+
+
+# Medium level, available guesses = 4 and answer is between 1 to 20
 if level == "m":
-    answer = random.randint(1,20)
-    life = 4
-    while life > 0:
-        print("You have", life, "guesses left. Please guess between 1 and 20")
-        
-        # check if input is an integer
-        try:
-            guess = int(input("Enter your guess: "))
-        except ValueError:
-            print("Invalid input, please enter a valid integer")
-            continue
-        life -= 1
-        
-        # check if guess is correct
-        if guess == answer:
-            print("Congratulations! You won the game!")
-            break
-        elif guess < answer:
-            print("Your guess is too low")
-            pass
-        elif guess > answer:
-            print("Your guess is too high")
-            pass
-        pass
-    print("Game Over!")
+    print("Please guess between 1 and 20")
+    game(4, random.randint(1,20))
 
-# Hard level
+
+# Hard level, available guesses = 3 and answer is between 1 to 50
 if level == "h":
-    answer = random.randint(1,50)
-    life = 3
-    while life > 0:
-        print("You have", life, "guesses left. Please guess between 1 and 50")
-        
-        # check if input is an integer
-        try:
-            guess = int(input("Enter your guess: "))
-        except ValueError:
-            print("Invalid input, please enter a valid integer")
-            continue
-        life -= 1
-        
-        # check if guess is correct
-        if guess == answer:
-            print("Congratulations! You won the game!")
-            break
-        elif guess < answer:
-            print("Your guess is too low")
-            pass
-        elif guess > answer:
-            print("Your guess is too high")
-            pass
-        pass
-    print("Game Over!")
+    print("Please guess between 1 and 50")
+    game(3, random.randint(1,50))
